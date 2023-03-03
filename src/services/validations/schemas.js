@@ -27,8 +27,20 @@ const addPostSchema = Joi.object({
   }),
 });
 
+const updatePostSchema = Joi.object({
+  title: Joi.string().required().messages({
+    'any.required': requiredMessage,
+    'string.empty': requiredMessage,
+  }),
+  content: Joi.string().required().messages({
+    'any.required': requiredMessage,
+    'string.empty': requiredMessage,
+  }),
+});
+
 module.exports = {
   addUserSchema,
   addCategorySchema,
   addPostSchema,
+  updatePostSchema,
 };

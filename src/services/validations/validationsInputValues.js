@@ -1,4 +1,4 @@
-const { addUserSchema, addCategorySchema, addPostSchema } = require('./schemas');
+const { addUserSchema, addCategorySchema, addPostSchema, updatePostSchema } = require('./schemas');
 
 const validateNewUser = (user) => {
   const { error } = addUserSchema.validate(user);
@@ -18,8 +18,15 @@ const validateNewPost = (post) => {
   return { status: 200, message: '' };
 };
 
+const validateUpdatedPost = (post) => {
+  const { error } = updatePostSchema.validate(post);
+  if (error) return { status: 400, message: error.message };
+  return { status: 200, message: '' };
+};
+
 module.exports = {
   validateNewUser,
   validateNewCategory,
   validateNewPost,
+  validateUpdatedPost,
 };

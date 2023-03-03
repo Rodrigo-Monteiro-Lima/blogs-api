@@ -43,8 +43,20 @@ const findById = async (id) => {
   return { status: 200, post };
 };
 
+const update = async (id, post, user) => {
+  const error = schema.validateUpdatedPost(post);
+  if (error.message) return error;
+  const postExist = await BlogPost.findOne({ where: { id } });
+  if (!postExist) return { status: 404, message: 'Post does not exist' };
+  if (postExist.userId !== user.id) return { status: 401, message: 'Unauthorized user' };
+  const [updatedPost] = await BlogPost.update(post, { where: { id } });
+  const { post: updated } = await findById(updatedPost);
+  return { status: 200, updated };
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  update,
 };
