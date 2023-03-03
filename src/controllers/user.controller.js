@@ -21,7 +21,19 @@ const findAll = async (_req, res, next) => {
   }
 };
 
+const findById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await userService.findById(id);
+    if (user.message) return next(user);
+    return res.status(user.status).json(user.user);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   findAll,
+  findById,
 };
