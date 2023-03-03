@@ -10,4 +10,6 @@ postRouter.post('/', postController.create);
 
 postRouter.get('/', postController.findAll);
 
+postRouter.get('/:id', postController.findById);
+
 module.exports = postRouter;

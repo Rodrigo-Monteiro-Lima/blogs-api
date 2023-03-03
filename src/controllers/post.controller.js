@@ -22,7 +22,19 @@ const findAll = async (_req, res, next) => {
   }
 };
 
+const findById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const post = await postService.findById(id);
+    if (post.message) return next(post);
+    return res.status(post.status).json(post.post);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
   findAll,
+  findById,
 };
