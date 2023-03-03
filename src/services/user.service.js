@@ -13,6 +13,15 @@ const create = async (user) => {
   return { status: 201, token };
 };
 
+const findByEmail = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  return user;
+};
+
+const findAll = async () => User.findAll({ attributes: { exclude: 'password' } });
+
 module.exports = {
   create,
+  findAll,
+  findByEmail,
 };
