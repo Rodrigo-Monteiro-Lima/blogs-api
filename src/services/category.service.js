@@ -12,6 +12,9 @@ const create = async (category) => {
   return { status: 201, newCategory };
 };
 
+const findAll = async () => Category.findAll();
+
 module.exports = {
   create,
+  findAll,
 };

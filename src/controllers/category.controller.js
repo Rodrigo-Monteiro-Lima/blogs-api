@@ -11,6 +11,16 @@ const create = async (req, res, next) => {
   }
 };
 
+const findAll = async (_req, res, next) => {
+  try {
+    const categories = await categoryService.findAll();
+    return res.status(200).json(categories);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   create,
+  findAll,
 };

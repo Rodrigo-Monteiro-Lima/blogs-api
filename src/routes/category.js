@@ -4,6 +4,10 @@ const auth = require('../middlewares/auth');
 
 const categoryRouter = express.Router();
 
-categoryRouter.post('/', auth, categoryController.create);
+categoryRouter.use(auth);
+
+categoryRouter.post('/', categoryController.create);
+
+categoryRouter.get('/', categoryController.findAll);
 
 module.exports = categoryRouter;
