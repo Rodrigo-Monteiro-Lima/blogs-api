@@ -1,4 +1,4 @@
-const { Category, BlogPost, PostCategory, sequelize } = require('../models');
+const { Category, BlogPost, PostCategory, sequelize, User } = require('../models');
 const schema = require('./validations/validationsInputValues');
 
 const create = async ({ title, content, userId, categoryIds }) => {
@@ -22,6 +22,17 @@ const create = async ({ title, content, userId, categoryIds }) => {
   }
 };
 
+const findAll = async () => {
+  const posts = await BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+  return posts;
+};
+
 module.exports = {
   create,
+  findAll,
 };
