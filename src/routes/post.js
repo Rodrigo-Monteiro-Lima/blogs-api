@@ -10,6 +10,8 @@ postRouter.post('/', postController.create);
 
 postRouter.get('/', postController.findAll);
 
+postRouter.get('/search', postController.searchPost);
+
 postRouter.get('/:id', postController.findById);
 
 postRouter.put('/:id', postController.update);
